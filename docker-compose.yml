@@ -1,6 +1,13 @@
 version: "3.1"
 
 services:
+  nginx:
+    image: nginx
+    restart: always
+    container_name: nginx-server
+    ports:
+      - 80:80
+
   db:
     image: mariadb
     restart: always
@@ -24,6 +31,7 @@ services:
     restart: always
     depends_on:
       - db
+      - nginx
     build:
       context: .
       dockerfile: ./Dockerfile
